@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../../actions/auth.actions";
 import classnames from "classnames";
+import { Form, Input, Button, Card, Typography } from "antd";
+import { BackwardFilled } from "@ant-design/icons";
+
+// Import Styling
+import "./Register.scss";
 
 class Register extends Component {
   constructor(props) {
@@ -12,8 +17,7 @@ class Register extends Component {
       name: "",
       email: "",
       password: "",
-      password2: "",
-      errors: {}
+      password2: ""
     };
   }
 
@@ -24,7 +28,7 @@ class Register extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -37,8 +41,6 @@ class Register extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault();
-
     const newUser = {
       name: this.state.name,
       email: this.state.email,
@@ -50,92 +52,114 @@ class Register extends Component {
   };
 
   render() {
-    const { errors } = this.state;
-
     return (
       <div className="register">
-        <div className="register__template">
-          <div className="register__container">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="col s12">
-              <h4>
-                <b>Register</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.name}
-                  error={errors.name}
-                  id="name"
-                  type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
-                />
-                <label htmlFor="name">Name</label>
-                <span className="red-text">{errors.name}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.email}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">{errors.password}</span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password2}
-                  error={errors.password2}
-                  id="password2"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
-                />
-                <label htmlFor="password2">Confirm Password</label>
-                <span className="red-text">{errors.password2}</span>
-              </div>
-              <div className="col s12">
-                <button
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Sign up
-                </button>
-              </div>
-            </form>
+        <Card className="register__container">
+          <Link to="/" className="register__container_back">
+            <BackwardFilled className="material-icons left" />
+            Back to home
+          </Link>
+          <div className="register__container_header header">
+            <Typography.Title className="header__title">
+              <b>Register</b> below
+            </Typography.Title>
+            <Typography.Paragraph className="header__login">
+              Already have an account? <Link to="/login">Log in</Link>
+            </Typography.Paragraph>
           </div>
-        </div>
+          <Form
+            noValidate
+            onFinish={this.onSubmit}
+            className="register__form form"
+          >
+            <Form.Item
+              name="name"
+              rules={[{ required: true, message: "Please fill your Name" }]}
+              className="form__input_name"
+            >
+              <Input
+                onChange={this.onChange}
+                value={this.state.name}
+                id="name"
+                type="text"
+                placeholder="Full Name"
+              />
+            </Form.Item>
+            <Form.Item
+              name="email"
+              rules={[
+                { type: "email", message: "That's not a valid E-mail!" },
+                {
+                  required: true,
+                  message: "Please input your E-mail Address!"
+                }
+              ]}
+              className="form__input_email"
+            >
+              <Input
+                onChange={this.onChange}
+                value={this.state.email}
+                id="email"
+                type="email"
+                placeholder="E-mail"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              className="form__input_password"
+              rules={[
+                { required: true, message: "Please fill your Password!" }
+              ]}
+              hasFeedback
+            >
+              <Input.Password
+                onChange={this.onChange}
+                value={this.state.password}
+                id="password"
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password2"
+              className="form__input__confirm"
+              dependencies={["password"]}
+              hasFeedback
+              rules={[
+                { required: true, message: "Please Confirm Your Password!" },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      "The two passwords that you entered do not match!"
+                    );
+                  }
+                })
+              ]}
+            >
+              <Input.Password
+                onChange={this.onChange}
+                value={this.state.password2}
+                id="password2"
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </Form.Item>
+            <Form.Item className="form__submit">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="form__submit_button"
+                block
+                size="large"
+              >
+                Register
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
       </div>
     );
   }
@@ -143,13 +167,11 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));
