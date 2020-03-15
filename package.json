@@ -1,0 +1,13 @@
+{
+  "name": "Chat-App",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "backend": "nodemon --exec babel-node backend/src/index.js",
+    "frontend": "npm run front --prefix web",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+  },
+  "author": "Arthur Andrade <arthur.diegoo@hotmail.com>",
+  "license": "MIT"
+}
