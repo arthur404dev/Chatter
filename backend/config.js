@@ -1,6 +1,6 @@
 // Importing Dotenv to keep sensitive data secure
 import dotenv from "dotenv";
-import { currDate } from "../helpers";
+import { currDate } from "./src/helpers";
 dotenv.config({ path: __dirname + "/.env" });
 // Log the success Status
 console.group();

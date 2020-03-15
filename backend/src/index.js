@@ -1,5 +1,5 @@
 // Config and Helper
-import "../src/config/dotenv.config";
+import "../config";
 import { currDate } from "./helpers/index";
 // Imports
 import express from "express";
