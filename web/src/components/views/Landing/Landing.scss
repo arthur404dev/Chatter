@@ -1,0 +1,30 @@
+.landing {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  .container {
+    width: 60%;
+    margin: auto;
+    display: flexbox;
+    margin-top: 5%;
+    &__title {
+      &_icon {
+        font-size: 5em;
+        margin: 5%;
+      }
+    }
+    &__description {
+      margin-bottom: 3%;
+      &_text {
+        font-size: 1.5em;
+      }
+    }
+    &__cta {
+      display: flex;
+      justify-content: space-evenly;
+      &_button {
+        width: 30%;
+      }
+    }
+  }
+}

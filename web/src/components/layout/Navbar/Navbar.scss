@@ -1,0 +1,86 @@
+.navBar {
+  padding: 0 20px;
+  border-bottom: solid 1px #e8e8e8;
+  overflow: auto;
+  box-shadow: 0 0 30px #f3f1f1;
+  &__logo {
+    width: 150px;
+    float: left;
+    &_link {
+      display: inline-block;
+      font-size: 20px;
+      padding: 19px 20px;
+    }
+  }
+  .menu {
+    width: calc(100% - 150px);
+    float: left;
+    .ant-menu-item {
+      padding: 0px;
+    }
+    .ant-menu-submenu-title {
+      padding: 0px 5px;
+    }
+    .ant-menu-submenu-title {
+      padding: 10px 20px;
+    }
+    .ant-menu-item a,
+    .ant-menu-submenu-title a {
+      padding: 10px 15px;
+    }
+    .ant-menu-horizontal {
+      border-bottom: none;
+    }
+    &__left {
+      float: left;
+    }
+    &__right {
+      float: right;
+    }
+    &__btn {
+      float: right;
+      height: 32px;
+      padding: 6px;
+      margin-top: 18px;
+      display: none;
+    }
+    .ant-drawer-body {
+      padding: 0;
+      .ant-menu-horizontal > .ant-menu-item,
+      .ant-menu-horizontal > .ant-menu-submenu {
+        display: inline-block;
+        width: 100%;
+      }
+      .ant-menu-horizontal {
+        border-bottom: none;
+      }
+      .ant-menu-horizontal > .ant-menu-item:hover {
+        border-bottom-color: transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .navBar {
+    &__logo {
+      a {
+        margin-left: -20px;
+      }
+    }
+    .menu {
+      &__left,
+      &__right {
+        display: none;
+      }
+      &__btn {
+        display: inline-block;
+      }
+
+      .ant-menu-item,
+      .ant-menu-submenu-title {
+        padding: 1px 20px;
+      }
+    }
+  }
+}

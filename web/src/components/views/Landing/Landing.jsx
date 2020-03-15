@@ -1,31 +1,50 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Typography, Card, Button } from "antd";
+import { WechatFilled } from "@ant-design/icons";
+// Import Scss
+import "./Landing.scss";
+// Extract Typography variants
+const { Title, Paragraph } = Typography;
 
 class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <div className="container">
+        <Card className="container" bordered={false}>
           <div className="container__title">
-            <h4 className="container__title_text welcome">
+            <Title className="container__title_text welcome">
               Welcome to Chatter!
-            </h4>
+            </Title>
+            <WechatFilled className="container__title_icon" />
           </div>
           <div className="container__description">
-            <p className="container__description_text description">
+            <Paragraph className="container__description_text description">
               Chat with anybody, anytime, identified, or anonimously.
-            </p>
+            </Paragraph>
             <br />
           </div>
           <div className="container__cta">
-            <Link to="/register" className="container__cta_button register">
-              Register
-            </Link>
-            <Link to="/login" className="container__cta_button login">
-              Log In
-            </Link>
+            <Button
+              size="large"
+              type="primary"
+              className="container__cta_button"
+            >
+              <Link to="/register" className="container__cta_button register">
+                Register
+              </Link>
+            </Button>
+            <Button
+              size="large"
+              type="primary"
+              className="container__cta_button"
+            >
+              <Link to="/login" className="container__cta_button login">
+                Log In
+              </Link>
+            </Button>
           </div>
-        </div>
+        </Card>
       </div>
     );
   }
