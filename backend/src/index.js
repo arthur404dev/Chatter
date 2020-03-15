@@ -4,8 +4,8 @@ import { currDate } from "./helpers/index";
 // Imports
 import express from "express";
 import cors from "cors";
+import passport from "passport";
 import bodyParser, { urlencoded } from "body-parser";
-import cookieParser from "cookie-parser";
 import { router } from "./routes/router";
 // Instance Creators
 import http from "http";
@@ -20,7 +20,10 @@ connect(process.env.DB_NAME);
 app.use(cors());
 app.use(bodyParser, urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
+// Setup Passport
+app.use(passport.initialize());
+require("./config/passport.config")(passport);
+// Initialize Routes
 app.use(router);
 // Define the server PORT
 const PORT = process.env.PORT || 5555;
