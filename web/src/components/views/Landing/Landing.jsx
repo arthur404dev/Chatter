@@ -30,7 +30,7 @@ class Landing extends Component {
               type="primary"
               className="container__cta_button"
             >
-              <Link to="/register" className="container__cta_button register">
+              <Link to="/register" className="container__cta_link register">
                 Register
               </Link>
             </Button>
@@ -39,7 +39,7 @@ class Landing extends Component {
               type="primary"
               className="container__cta_button"
             >
-              <Link to="/login" className="container__cta_button login">
+              <Link to="/login" className="container__cta_link login">
                 Log In
               </Link>
             </Button>
