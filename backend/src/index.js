@@ -18,7 +18,7 @@ const server = http.createServer(app);
 connect(process.env.DB_NAME);
 // Setup Middlewares
 app.use(cors());
-app.use(bodyParser, urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Setup Passport
 app.use(passport.initialize());

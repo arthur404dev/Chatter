@@ -12,9 +12,7 @@ import validateLoginInput from "../middleware/login";
 // Load User model
 import User from "../models/User";
 
-// @route POST api/users/register
-// @desc Register user
-// @access Public
+// Register Route
 routes.post("/register", (req, res) => {
   // Form validation
 
@@ -50,9 +48,7 @@ routes.post("/register", (req, res) => {
   });
 });
 
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
+// Login Route
 routes.post("/login", (req, res) => {
   // Form validation
 
