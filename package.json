@@ -9,5 +9,14 @@
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "Arthur Andrade <arthur.diegoo@hotmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "babel-cli": "^6.26.0",
+    "babel-node": "^0.0.1-security",
+    "nodemon": "^2.0.2"
+  }
 }
