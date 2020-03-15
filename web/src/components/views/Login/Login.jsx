@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../../actions/auth.actions";
-import classnames from "classnames";
+import { Form, Input, Button, Card, Typography } from "antd";
+import { BackwardFilled } from "@ant-design/icons";
+
+// Import Styling
+import "./Login.scss";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      errors: {}
+      password: ""
     };
   }
 
@@ -22,7 +25,7 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -39,7 +42,7 @@ class Login extends Component {
   };
 
   onSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const userData = {
       email: this.state.email,
@@ -50,74 +53,60 @@ class Login extends Component {
   };
 
   render() {
-    const { errors } = this.state;
-
     return (
       <div className="login">
-        <div className="login__template">
-          <div className="login__container container">
-            <Link to="/" className="container__back">
-              <i className="container__back_icon">keyboard_backspace</i> Back to
-              home
-            </Link>
-            <div className="container__title">
-              <h4 className="container__title_text">
-                <b>Login</b> below
-              </h4>
-              <p className="container__title_register">
-                Don't have an account? <Link to="/register">Register</Link>
-              </p>
-            </div>
-            <form
-              noValidate
-              onSubmit={this.onSubmit}
-              className="container__form form"
-            >
-              <div className="form__inputs">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">
-                  {errors.email}
-                  {errors.emailnotfound}
-                </span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
-                </span>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
+        <Card className="login__container" bordered={false}>
+          <Link to="/" className="login__container_back">
+            <BackwardFilled /> Back to home
+          </Link>
+          <div className="login__container_header header">
+            <Typography.Title className="header__title">
+              <b>Login</b> below
+            </Typography.Title>
+            <Typography.Paragraph className="header__register">
+              Don't have an account? <Link to="/register">Register</Link>
+            </Typography.Paragraph>
           </div>
-        </div>
+          <Form
+            noValidate
+            onFinish={this.onSubmit}
+            className="login__form form"
+          >
+            <Form.Item
+              name="email"
+              rules={[{ required: true }]}
+              className="form__inputs"
+            >
+              <Input
+                onChange={this.onChange}
+                value={this.state.email}
+                id="email"
+                type="email"
+                placeholder="E-mail"
+              />
+            </Form.Item>
+            <Form.Item name="password" className="form__input_password">
+              <Input.Password
+                onChange={this.onChange}
+                value={this.state.password}
+                id="password"
+                type="password"
+                placeholder="Password"
+              />
+            </Form.Item>
+            <Form.Item className="form__submit">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="form__submit_button"
+                block
+                size="large"
+              >
+                Login
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
       </div>
     );
   }
@@ -125,13 +114,11 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-  errors: state.errors
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

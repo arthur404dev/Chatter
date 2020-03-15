@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../../actions/auth.actions";
-import classnames from "classnames";
 import { Form, Input, Button, Card, Typography } from "antd";
 import { BackwardFilled } from "@ant-design/icons";
 
@@ -54,9 +53,9 @@ class Register extends Component {
   render() {
     return (
       <div className="register">
-        <Card className="register__container">
+        <Card className="register__container" bordered={false}>
           <Link to="/" className="register__container_back">
-            <BackwardFilled className="material-icons left" />
+            <BackwardFilled />
             Back to home
           </Link>
           <div className="register__container_header header">

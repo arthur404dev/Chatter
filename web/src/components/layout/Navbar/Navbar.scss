@@ -36,6 +36,10 @@
     }
     &__right {
       float: right;
+      .user {
+        padding: 10px 15px;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+      }
     }
     &__btn {
       float: right;
