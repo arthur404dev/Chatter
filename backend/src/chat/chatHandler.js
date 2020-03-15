@@ -6,28 +6,28 @@ const DB_Name = process.env.DB_NAME;
 
 const handler = socket => {
   socket.on("Input Chat Message", msg => {
-    connect(DB_Name).then(db => {
-      try {
-        let chat = new Chat({
-          message: msg.chatMessage,
-          sender: msg.userId,
-          type: msg.type
-        });
+    // connect(DB_Name).then(db => { - Connection to the DB beign done on server startup, this feature would be good for multiple databases
+    try {
+      let chat = new Chat({
+        message: msg.chatMessage,
+        sender: msg.userId,
+        type: msg.type
+      });
 
-        chat.save((err, doc) => {
-          console.log(doc);
-          if (err) return res.json({ success: false, err });
+      chat.save((err, doc) => {
+        console.log(doc);
+        if (err) return res.json({ success: false, err });
 
-          Chat.find({ _id: doc._id })
-            .populate("sender")
-            .exec((err, doc) => {
-              return io.emit("Output Chat Message", doc);
-            });
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    });
+        Chat.find({ _id: doc._id })
+          .populate("sender")
+          .exec((err, doc) => {
+            return io.emit("Output Chat Message", doc);
+          });
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    // });
   });
 };
 

@@ -36,7 +36,7 @@ class RightMenu extends Component {
             </Typography>
           </Menu.Item>
           <Menu.Item key="logout">
-            <a href="/login">Log-out</a>
+            <a href="/dashboard">Log-out</a>
           </Menu.Item>
         </Menu>
       );
