@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button } from "antd";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -27,7 +27,9 @@ class ChatPage extends Component {
     });
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
 
   handleSearchChange = e => {
     this.setState({
@@ -59,7 +61,7 @@ class ChatPage extends Component {
     return (
       <div className="chat">
         <div className="container">
-          <div className="infinite-container">
+          <div className="chat__messages">
             {this.props.chats.chats
               ? this.props.chats.chats.map(el => (
                   <ChatCard key={el._id} {...el} />
@@ -76,31 +78,34 @@ class ChatPage extends Component {
         </div>
 
         <div>
-          <Row>
-            <Form layout="inline" onFinish={this.submitChatMessage}>
-              <Col span={18}>
-                <Input
-                  id="message"
-                  placeholder="Let's start talking"
-                  type="text"
-                  value={this.state.chatMessage}
-                  onChange={this.handleSearchChange}
-                />
-              </Col>
-              <Col span={2}></Col>
-
-              <Col span={4}>
-                <Button
-                  type="primary"
-                  style={{ width: "100%" }}
-                  onClick={this.submitChatMessage}
-                  htmlType="submit"
-                >
-                  Enter
-                </Button>
-              </Col>
-            </Form>
-          </Row>
+          <Form
+            className="chat__entry entry"
+            layout="inline"
+            onFinish={this.submitChatMessage}
+          >
+            <Form.Item className="entry__item">
+              <Input
+                size="large"
+                id="message"
+                placeholder="Let's start talking"
+                type="text"
+                value={this.state.chatMessage}
+                onChange={this.handleSearchChange}
+                className="entry__input"
+              />
+            </Form.Item>
+            <Form.Item className="entry__item">
+              <Button
+                size="large"
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={this.submitChatMessage}
+                htmlType="submit"
+              >
+                Enter
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     );

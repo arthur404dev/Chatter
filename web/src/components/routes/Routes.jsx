@@ -6,7 +6,7 @@ import { Register } from "../views/Register";
 import { Login } from "../views/Login";
 
 import PrivateRoute from "./PrivateRoute.routes";
-import { Dashboard } from "../views/Dashboard";
+import { Logout } from "../views/Logout";
 import { Chat } from "../Chat";
 
 export default () => {
@@ -18,7 +18,7 @@ export default () => {
         <Route exact path="/login" component={Login} />
       </Switch>
       <Switch>
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/logout" component={Logout} />
         <PrivateRoute exact path="/chat" component={Chat} />
       </Switch>
     </Fragment>

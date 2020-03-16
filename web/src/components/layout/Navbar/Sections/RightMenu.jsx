@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { Menu, Typography } from "antd";
 import { logoutUser } from "../../../../actions/auth.actions";
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 class RightMenu extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +34,7 @@ class RightMenu extends Component {
             </Typography>
           </Menu.Item>
           <Menu.Item key="logout">
-            <a href="/dashboard">Log-out</a>
+            <a href="/logout">Log-out</a>
           </Menu.Item>
         </Menu>
       );

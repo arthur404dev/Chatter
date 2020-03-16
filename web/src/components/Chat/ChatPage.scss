@@ -1,4 +1,29 @@
 .chat {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  &__messages {
+    margin: auto;
+    width: 65%;
+    display: block;
+    height: 600px;
+    overflow-y: scroll;
+  }
+  &__entry {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flexbox;
+    &__item {
+      width: 100%;
+      display: block;
+    }
+    &__input {
+      width: 500px;
+      display: block;
+    }
+  }
 }
 
 .infinite-container {
