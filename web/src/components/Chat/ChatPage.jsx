@@ -16,7 +16,7 @@ class ChatPage extends Component {
   }
 
   componentDidMount() {
-    let server = "http://localhost:5555";
+    let server = process.env.REACT_APP_API_URL;
 
     this.props.dispatch(getChats());
 
