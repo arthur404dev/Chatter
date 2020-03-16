@@ -1,5 +1,6 @@
 import axios from "axios";
 import CSVtoJSON from "csvtojson";
+import uid from "uid";
 
 // Bot controller
 export const stockBot = async stockId => {
@@ -17,7 +18,7 @@ export const stockBot = async stockId => {
       msg = `I can't retrieve the value for ${stockName} right now, try again in a few minutes`;
     }
     let obj = {
-      _id: "1",
+      _id: uid(),
       message: msg,
       sender: { name: "StockBot" },
       type: "Bot Message",

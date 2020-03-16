@@ -26,6 +26,7 @@
     "passport-jwt": "^4.0.0",
     "path": "^0.12.7",
     "socket.io": "^2.3.0",
+    "uid": "^1.0.0",
     "validator": "^12.2.0"
   },
   "devDependencies": {
