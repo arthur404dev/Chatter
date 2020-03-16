@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+// const SubMenu = Menu.SubMenu;
+// const MenuItemGroup = Menu.ItemGroup;
 class LeftMenu extends Component {
   render() {
     return (
       <Menu mode="horizontal">
-        <Menu.Item key="mail">
+        <Menu.Item key="home">
           <a href="/">Home</a>
         </Menu.Item>
-        <SubMenu title={<span>Rooms</span>}>
+        {/* <SubMenu title={<span>Rooms</span>}>
           <MenuItemGroup title="Code">
             <Menu.Item key="setting:1">
               <a href="/chat/javascript">Javascript</a>
@@ -20,8 +20,8 @@ class LeftMenu extends Component {
             <Menu.Item key="setting:3">Predictions</Menu.Item>
             <Menu.Item key="setting:4">Bidding</Menu.Item>
           </MenuItemGroup>
-        </SubMenu>
-        <Menu.Item key="alipay">
+        </SubMenu> */}
+        <Menu.Item key="live-chat">
           <a href="/chat">Live Chat</a>
         </Menu.Item>
       </Menu>
