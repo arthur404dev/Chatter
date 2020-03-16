@@ -3,22 +3,31 @@ import { Form, Input, Button, Row, Col } from "antd";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import moment from "moment";
+import { getChats, afterPostMessage } from "../../actions/chat.actions";
+import ChatCard from "./ChatCard";
 import "./ChatPage.scss";
 
-export class ChatPage extends Component {
-  state = {
-    chatMessage: ""
-  };
+class ChatPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatMessage: ""
+    };
+  }
 
   componentDidMount() {
     let server = "http://localhost:5555";
 
+    this.props.dispatch(getChats());
+
     this.socket = io(server);
 
     this.socket.on("Output Chat Message", messageFromBackEnd => {
-      console.log(messageFromBackEnd);
+      this.props.dispatch(afterPostMessage(messageFromBackEnd));
     });
   }
+
+  componentDidUpdate() {}
 
   handleSearchChange = e => {
     this.setState({
@@ -48,16 +57,14 @@ export class ChatPage extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div>
-          <p style={{ fontSize: "2rem", textAlign: "center" }}> Live Chat</p>
-        </div>
-
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+      <div className="chat">
+        <div className="container">
           <div className="infinite-container">
-            {/* {this.props.chats && (
-                            <div>{this.renderCards()}</div>
-                        )} */}
+            {this.props.chats.chats
+              ? this.props.chats.chats.map(el => (
+                  <ChatCard key={el._id} {...el} />
+                ))
+              : null}
             <div
               ref={el => {
                 this.messagesEnd = el;
@@ -65,7 +72,10 @@ export class ChatPage extends Component {
               style={{ float: "left", clear: "both" }}
             />
           </div>
+          <p style={{ fontSize: "2rem", textAlign: "center" }}> Live Chat</p>
+        </div>
 
+        <div>
           <Row>
             <Form layout="inline" onFinish={this.submitChatMessage}>
               <Col span={18}>
@@ -92,14 +102,15 @@ export class ChatPage extends Component {
             </Form>
           </Row>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    chats: state.chat
   };
 };
 
