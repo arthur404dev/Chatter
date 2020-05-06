@@ -1,4 +1,4 @@
-# Job Scheduler
+# Chatter App
 ![Chatter Logo](img/../assets/img/Chatter-Logo.png)
 
 >This project was done using open source code, feel free to use it as you want!
